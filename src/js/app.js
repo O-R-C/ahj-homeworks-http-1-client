@@ -1,6 +1,9 @@
 import setTitle from './setTitle'
+import HelpDesk from '@/components/HelpDesk/HelpDesk'
 
 setTitle('HelpDesk')
+
+const helpDesk = new HelpDesk('body')
 
 const fetchData = async () => {
   return await fetch('http://localhost:3000/test/', {

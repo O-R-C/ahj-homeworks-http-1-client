@@ -8,6 +8,9 @@
       "@js/*": [
         "./src/js/*"
       ],
+      "@css/*": [
+        "./src/css/*"
+      ],
       "@images/*": [
         "./src/images/*"
       ],
