@@ -3,7 +3,7 @@ import HelpDesk from '@/components/HelpDesk/HelpDesk'
 
 setTitle('HelpDesk')
 
-const helpDesk = new HelpDesk('body')
+new HelpDesk('body')
 
 const fetchData = async () => {
   return await fetch('http://localhost:3000/test/', {
@@ -22,3 +22,12 @@ const logResponse = (response) => {
 }
 
 fetchData()
+
+import Ticket from '@/components/ui/Ticket/Ticket'
+
+const ticket = Ticket({
+  desc: 'desc',
+  time: 'time',
+})
+
+document.body.append(ticket)

@@ -58,13 +58,13 @@ const getControls = () => {
 const getWrapper = (className, element) => {
   const wrapper = getDiv(className)
 
-  element && wrapper.appendElements(element)
+  element && appendElements(wrapper, element)
 
   return wrapper
 }
 
-const appendElements = (elements) => {
-  Array.isArray(elements) ? this.append(...elements) : this.append(elements)
+const appendElements = (wrapper, elements) => {
+  Array.isArray(elements) ? wrapper.append(...elements) : wrapper.append(elements)
 }
 
 export default Ticket
