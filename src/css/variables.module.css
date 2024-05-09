@@ -1,0 +1,9 @@
+@value colorMain: #1079ba;
+@value colorSecondary: #ccc;
+
+@value padding: 10px;
+
+@value radius: 5px;
+@value border: 2px solid colorSecondary;
+
+@value shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.1);

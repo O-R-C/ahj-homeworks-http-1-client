@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  overflow-y: auto;
+}
+
+body {
+  font-family: sans-serif;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
