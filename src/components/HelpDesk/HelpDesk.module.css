@@ -2,18 +2,39 @@
 @value colorMain, colorSecondary, padding, radius, border from values;
 
 .help-desk {
-  width: 100%;
-  min-height: 100px;
+  width: 80%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: padding;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: padding;
 
   border: border;
   border-radius: radius;
-  padding: padding;
-  background-color: colorSecondary;
 
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: shadow;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.btn-add-ticket {
+  padding: padding;
+  border-radius: radius;
+  background-color: colorMain;
+  color: colorSecondary;
+  border: 0;
+  cursor: pointer;
+
+  align-self: end;
+
+  box-shadow: shadow;
+}
+
+.tickets-container {
+  width: 100%;
+  min-height: 100px;
 }

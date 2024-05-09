@@ -1,21 +1,23 @@
 import HelpDeskUI from './HelpDeskUI'
 
 export default class HelpDesk {
-  #ui = new HelpDeskUI()
-  #app = this.#ui.app
-  #element
+  #ui
+  #app
 
   constructor(element) {
-    this.#element = this.#ui.getElement(element)
+    this.#ui = new HelpDeskUI(element)
 
     this.#init()
   }
 
   #init() {
-    this.#bindToDom()
+    this.#addElements()
+    this.#addEventListeners()
   }
 
-  #bindToDom() {
-    this.#element.append(this.#ui.app)
+  #addElements() {
+    this.#app = this.#ui.app
   }
+
+  #addEventListeners() {}
 }
