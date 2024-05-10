@@ -20,6 +20,6 @@ export default class Tickets {
   }
 
   #onLoadedTickets = ({ detail: tickets }) => {
-    console.log('🚀 ~ tickets:', tickets)
+    this.#ui.renderTickets(tickets)
   }
 }

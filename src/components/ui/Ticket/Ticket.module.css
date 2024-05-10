@@ -41,11 +41,14 @@
 }
 
 .descriptionsWrapper {
-  flex: 80%;
+  flex: 1 0 70%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(padding * 0.5);
 }
 
 .time {
-  flex: 10%;
+  flex: 20%;
 }
 
 .controlsWrapper {

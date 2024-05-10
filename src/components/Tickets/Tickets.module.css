@@ -1,0 +1,8 @@
+@value values: '@css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border from values;
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  gap: calc(padding * 0.5);
+}

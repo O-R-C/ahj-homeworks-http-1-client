@@ -7,7 +7,7 @@ export default class HelpDeskUI extends BaseUI {
   constructor(element) {
     super(element)
 
-    this.addElements()
+    this.#addElements()
   }
   createApp() {
     const app = getElement({
@@ -36,7 +36,7 @@ export default class HelpDeskUI extends BaseUI {
     return app
   }
 
-  addElements() {
+  #addElements() {
     this.#addTickets()
   }
 

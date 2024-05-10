@@ -1,10 +1,10 @@
 import getElement from '@/js/getElement'
 import styles from './Ticket.module.css'
 
-export const Ticket = ({ desc, time }) => {
+export const Ticket = ({ name, createdAt }) => {
   const checkboxSection = getCheckbox('checkbox')
-  const descriptionsSection = getDescriptions('descriptions', desc)
-  const timeSection = getDiv('time', time)
+  const descriptionsSection = getDescriptions('descriptions', name)
+  const timeSection = getDiv('time', createdAt)
   const controlsSection = getControls()
 
   return getWrapper('ticket', [checkboxSection, descriptionsSection, timeSection, controlsSection])
