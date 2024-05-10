@@ -23,6 +23,8 @@ export default class HelpDesk {
   }
 
   #addEventListeners() {
+    document.addEventListener('submitTicket', this.#onSubmitTicket)
+    document.addEventListener('resetForm', this.#onResetForm)
     this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
   }
 
@@ -51,10 +53,28 @@ export default class HelpDesk {
   }
 
   #onClickAddTicket = () => {
-    this.#showForm()
+    this.#fireSetTitleForm('Добавить тикет')
+    this.#ui.showForm()
   }
 
-  #showForm() {
-    this.#ui.formContainer.showModal()
+  #getSetTitleForm(title) {
+    return new CustomEvent('setTitleForm', { detail: title })
+  }
+
+  #fireSetTitleForm(title) {
+    document.dispatchEvent(this.#getSetTitleForm(title))
+  }
+
+  #onSubmitTicket = (event) => {
+    event.preventDefault()
+    console.log('🚀 ~ event:', event)
+
+    const { name, description } = event.detail
+
+    this.#ui.formContainer.close()
+  }
+
+  #onResetForm = () => {
+    this.#ui.formContainer.close()
   }
 }

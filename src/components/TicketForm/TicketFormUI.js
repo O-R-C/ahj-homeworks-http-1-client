@@ -3,13 +3,16 @@ import getElement from '@/js/getElement'
 import styles from './TicketForm.module.css'
 
 export default class TicketFormUI extends BaseUI {
+  #timerEmptyField
+
   createApp() {
     const app = getElement({
       tag: 'form',
+      name: 'ticketForm',
       classes: [styles.ticketForm],
     })
 
-    const header = getElement({
+    this.header = getElement({
       tag: 'h3',
       textContent: 'Добавить тикет',
       classes: [styles.header],
@@ -51,25 +54,42 @@ export default class TicketFormUI extends BaseUI {
       classes: [styles.controls],
     })
 
-    const btnSubmit = getElement({
-      tag: 'button',
-      type: 'submit',
-      textContent: 'Ok',
-      classes: [styles.btnSubmit],
-    })
-
-    const btnCancel = getElement({
+    this.btnCancel = getElement({
       tag: 'button',
       type: 'reset',
       textContent: 'Отмена',
       classes: [styles.btnCancel],
     })
 
+    this.btnSubmit = getElement({
+      tag: 'button',
+      type: 'submit',
+      textContent: 'Ok',
+      classes: [styles.btnSubmit],
+    })
+
     nameLabel.append(nameInput)
     descriptionLabel.append(descriptionInput)
-    controls.append(btnCancel, btnSubmit)
-    app.append(header, nameLabel, descriptionLabel, controls)
+    controls.append(this.btnCancel, this.btnSubmit)
+    app.append(this.header, nameLabel, descriptionLabel, controls)
 
     return app
+  }
+
+  setTitleForm(title) {
+    this.header.textContent = title
+  }
+
+  showEmptyFieldError(emptyField) {
+    if (this.#timerEmptyField) {
+      clearTimeout(this.timerEmptyField)
+    }
+
+    emptyField.classList.add(styles.error)
+    emptyField.placeholder = 'Поле не может быть пустым'
+
+    this.#timerEmptyField = setTimeout(() => {
+      emptyField.classList.remove(styles.error)
+    }, 1000)
   }
 }

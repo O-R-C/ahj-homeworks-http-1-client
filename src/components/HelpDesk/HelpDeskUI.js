@@ -24,7 +24,7 @@ export default class HelpDeskUI extends BaseUI {
     this.btnAddTicket = getElement({
       tag: 'button',
       classes: [styles.btnAddTicket],
-      textContent: 'Add Ticket',
+      textContent: 'Добавить тикет',
     })
 
     this.ticketsContainer = getElement({
@@ -48,5 +48,13 @@ export default class HelpDeskUI extends BaseUI {
 
   #addTicketForm() {
     new TicketForm(this.formContainer)
+  }
+
+  showForm() {
+    this.formContainer.showModal()
+  }
+
+  hideForm() {
+    this.formContainer.close()
   }
 }
