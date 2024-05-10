@@ -1,5 +1,5 @@
 @value values: '@css/variables.module.css';
-@value colorMain, colorSecondary, padding, radius, border from values;
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
 
 .help-desk {
   width: 80%;

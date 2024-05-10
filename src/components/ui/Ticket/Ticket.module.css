@@ -1,5 +1,5 @@
 @value values: '@css/variables.module.css';
-@value colorMain, colorSecondary, padding, radius, border from values;
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
 
 .ticket {
   width: 100%;
@@ -12,7 +12,7 @@
   border-radius: radius;
   border: border;
 
-  box-shadow: shadow;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.1);
 }
 
 .checkboxWrapper {
