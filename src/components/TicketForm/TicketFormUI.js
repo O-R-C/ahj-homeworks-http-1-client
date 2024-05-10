@@ -87,6 +87,7 @@ export default class TicketFormUI extends BaseUI {
 
     emptyField.classList.add(styles.error)
     emptyField.placeholder = 'Поле не может быть пустым'
+    emptyField.focus()
 
     this.#timerEmptyField = setTimeout(() => {
       emptyField.classList.remove(styles.error)

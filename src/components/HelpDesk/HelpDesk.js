@@ -25,6 +25,7 @@ export default class HelpDesk {
   #addEventListeners() {
     document.addEventListener('submitTicket', this.#onSubmitTicket)
     document.addEventListener('resetForm', this.#onResetForm)
+    document.addEventListener('checkboxChange', this.#onCheckboxChange)
     this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
   }
 
@@ -86,5 +87,10 @@ export default class HelpDesk {
 
   #onResetForm = () => {
     this.#ui.formContainer.close()
+  }
+
+  #onCheckboxChange = (event) => {
+    const { status, id } = event.detail
+    console.log('🚀 ~  status, id:', status, id)
   }
 }

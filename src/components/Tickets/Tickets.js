@@ -2,6 +2,8 @@ import TicketsUI from './TicketsUI'
 
 export default class Tickets {
   #ui
+  #timerCheckboxChange
+
   constructor(element) {
     this.#ui = new TicketsUI(element)
 
@@ -26,10 +28,38 @@ export default class Tickets {
 
   #onClick = (event) => {
     const target = event.target
+    const ticket = this.#getTicket(target)
 
-    if (target.closest('button[class*="btn-delete"]')) {
-      this.#deleteTicket(target)
+    if (!ticket) return
+
+    const id = this.#getId(ticket)
+    console.log('🚀 ~ id:', id)
+
+    if (this.#isBtnDelete(target)) {
+      this.#onClickBtnDelete(id)
+      return
     }
+
+    if (this.#isBtnEdit(target)) {
+      this.#onClickBtnEdit(id)
+      return
+    }
+
+    const checkbox = this.#isCheckbox(target)
+    if (checkbox) {
+      this.#onClickCheckbox(checkbox, id)
+      return
+    }
+
+    this.#onClickTicket(id)
+  }
+
+  #getTicket(target) {
+    return target.closest('div[class*="ticket"]')
+  }
+
+  #getId(ticket) {
+    return ticket.dataset.id
   }
 
   #isBtnDelete(target) {
@@ -44,17 +74,43 @@ export default class Tickets {
     return target.closest('input[type="checkbox"]')
   }
 
-  #isTicket(target) {
-    return target.closest('div[class*="ticket"]')
+  #onClickBtnDelete(id) {}
+
+  #onClickBtnEdit(id) {}
+
+  #onClickCheckbox(checkbox, id) {
+    if (this.#timerCheckboxChange) {
+      clearTimeout(this.#timerCheckboxChange)
+    }
+
+    this.#timerCheckboxChange = setTimeout(() => {
+      this.#fireCheckboxChange(checkbox, id)
+    }, 1000)
   }
 
-  #onClickBtnDelete() {}
+  #onClickTicket(id) {}
 
-  #onClickBtnEdit() {}
+  #deleteTicket(id) {
+    this.#fireDeleteTicket(id)
+  }
 
-  #onClickCheckbox() {}
+  #getCheckboxChange(checkbox, id) {
+    return new CustomEvent('checkboxChange', {
+      detail: { status: checkbox.checked, id },
+    })
+  }
 
-  #onClickTicket() {}
+  #getDeleteTicket(id) {
+    return new CustomEvent('deleteTicket', {
+      detail: id,
+    })
+  }
 
-  #deleteTicket(target) {}
+  #fireCheckboxChange(checkbox, id) {
+    document.dispatchEvent(this.#getCheckboxChange(checkbox, id))
+  }
+
+  #fireDeleteTicket(id) {
+    document.dispatchEvent(this.#getDeleteTicket(id))
+  }
 }
