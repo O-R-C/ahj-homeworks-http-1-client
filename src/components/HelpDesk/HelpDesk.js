@@ -23,9 +23,10 @@ export default class HelpDesk {
   }
 
   #addEventListeners() {
-    document.addEventListener('submitTicket', this.#onSubmitTicket)
     document.addEventListener('resetForm', this.#onResetForm)
+    document.addEventListener('submitTicket', this.#onSubmitTicket)
     document.addEventListener('checkboxChange', this.#onCheckboxChange)
+    document.addEventListener('deleteTicket', this.#onDeleteTicket)
     this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
     this.#ui.formContainer.addEventListener('close', this.#onCloseTicketForm)
   }
@@ -105,6 +106,14 @@ export default class HelpDesk {
   #onCheckboxChange = (event) => {
     this.#fetchData(this.#url, {
       method: 'PATCH',
+      body: JSON.stringify(event.detail),
+    })
+  }
+
+  #onDeleteTicket = (event) => {
+    console.log('🚀 ~ event:', event)
+    this.#fetchData(this.#url, {
+      method: 'DELETE',
       body: JSON.stringify(event.detail),
     })
   }

@@ -2,6 +2,7 @@ import TicketsUI from './TicketsUI'
 
 export default class Tickets {
   #ui
+  #currentId
   #timerCheckboxChange
 
   constructor(element) {
@@ -20,6 +21,8 @@ export default class Tickets {
   #addEventListeners() {
     document.addEventListener('loadedTickets', this.#onLoadedTickets)
     this.#ui.app.addEventListener('click', this.#onClick)
+    this.#ui.confirmContainer.addEventListener('close', this.#onConfirmDelete)
+    this.#ui.confirmContainer.addEventListener('keypress', this.#onConfirmKeyPress)
   }
 
   #onLoadedTickets = ({ detail: tickets }) => {
@@ -74,7 +77,22 @@ export default class Tickets {
   }
 
   #onClickBtnDelete(id) {
-    this.#fireShowConfirmDelete()
+    this.#currentId = id
+    this.#ui.confirmContainer.returnValue = 'cancel'
+    this.#ui.showConfirmDeleteForm()
+  }
+
+  #onConfirmDelete = (event) => {
+    if (event.currentTarget.returnValue === 'cancel') return
+
+    this.#deleteTicket(this.#currentId)
+  }
+
+  #onConfirmKeyPress = (event) => {
+    if (event.key !== 'Enter') return
+
+    event.currentTarget.returnValue = 'confirm'
+    this.#onConfirmDelete(event)
   }
 
   #onClickBtnEdit(id) {}
@@ -104,12 +122,6 @@ export default class Tickets {
     })
   }
 
-  #getShowConfirmDelete(id) {
-    return new CustomEvent('showConfirmDelete', {
-      detail: id,
-    })
-  }
-
   #getDeleteTicket(id) {
     return new CustomEvent('deleteTicket', {
       detail: id,
@@ -122,9 +134,5 @@ export default class Tickets {
 
   #fireDeleteTicket(id) {
     document.dispatchEvent(this.#getDeleteTicket(id))
-  }
-
-  #fireShowConfirmDelete(id) {
-    document.dispatchEvent(this.#getShowConfirmDelete(id))
   }
 }

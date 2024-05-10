@@ -1,20 +1,7 @@
 import ConfirmDeleteFormUI from './ConfirmDeleteFormUI'
 
 export default class ConfirmDeleteForm {
-  #ui
-
   constructor(element) {
-    this.#ui = new ConfirmDeleteFormUI(element)
-
-    this.#init()
+    this.ui = new ConfirmDeleteFormUI(element)
   }
-
-  #init() {
-    this.#addElements()
-    this.#addEventListeners()
-  }
-
-  #addElements() {}
-
-  #addEventListeners() {}
 }

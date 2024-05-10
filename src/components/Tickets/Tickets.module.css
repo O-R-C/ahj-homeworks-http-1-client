@@ -2,7 +2,20 @@
 @value colorMain, colorSecondary, padding, radius, border from values;
 
 .tickets {
-  display: flex;
-  flex-direction: column;
-  gap: calc(padding * 0.5);
+  width: 100%;
+
+  & .tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(padding * 0.5);
+  }
+
+  & .confirm-container {
+    padding: padding;
+
+    border-radius: calc(padding * 2);
+    border: border;
+
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.1);
+  }
 }

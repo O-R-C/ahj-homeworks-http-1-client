@@ -18,7 +18,7 @@ export default class ConfirmDeleteFormUI extends BaseUI {
     })
 
     const description = getElement({
-      tag: 'p',
+      tag: 'pre',
       textContent: 'Вы уверены, что хотите удалить этот тикет?\nЭто действие нельзя отменить.',
       classes: [styles.description],
     })
@@ -30,7 +30,6 @@ export default class ConfirmDeleteFormUI extends BaseUI {
 
     this.btnCancel = getElement({
       tag: 'button',
-      type: 'reset',
       value: 'cancel',
       textContent: 'Отмена',
       classes: [styles.btnCancel],
@@ -38,7 +37,6 @@ export default class ConfirmDeleteFormUI extends BaseUI {
 
     this.btnConfirm = getElement({
       tag: 'button',
-      type: 'submit',
       value: 'confirm',
       textContent: 'Ok',
       classes: [styles.btnConfirm],
