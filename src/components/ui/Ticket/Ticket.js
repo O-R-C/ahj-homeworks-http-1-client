@@ -22,13 +22,21 @@ const getDiv = (className, textContent = '') => {
 }
 
 const getCheckbox = (className) => {
+  const label = getElement({
+    tag: 'label',
+  })
+
   const checkbox = getElement({
     tag: 'input',
     type: 'checkbox',
     classes: styles[className],
   })
 
-  return getWrapper('checkboxWrapper', checkbox)
+  const customCheckbox = getDiv('checkboxCustom')
+
+  label.append(checkbox, customCheckbox)
+
+  return getWrapper('checkboxWrapper', [label])
 }
 
 const getDescriptions = (className, text) => {
@@ -42,13 +50,11 @@ const getDescriptions = (className, text) => {
 const getControls = () => {
   const btnEdit = getElement({
     tag: 'button',
-    textContent: 'Edit',
     classes: styles.btnEdit,
   })
 
   const btnDelete = getElement({
     tag: 'button',
-    textContent: 'Delete',
     classes: styles.btnDelete,
   })
 

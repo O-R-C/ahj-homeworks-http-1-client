@@ -1,0 +1,76 @@
+@value values: '@css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border from values;
+
+.ticket {
+  width: 100%;
+  padding: calc(padding / 2);
+
+  display: flex;
+  align-items: center;
+  gap: padding;
+
+  border-radius: radius;
+  border: border;
+
+  box-shadow: shadow;
+}
+
+.checkboxWrapper {
+  flex: 1%;
+
+  & input {
+    display: none;
+  }
+
+  & .checkboxCustom {
+    width: 20px;
+    height: 20px;
+    padding: calc(padding * 1.2);
+
+    border-radius: 50%;
+
+    background-color: white;
+    background: no-repeat center/60% white;
+    border: 1px solid colorSecondary;
+    cursor: pointer;
+  }
+}
+
+.checkbox:checked + .checkboxCustom {
+  background-image: url('@images/checked.png');
+}
+
+.descriptionsWrapper {
+  flex: 80%;
+}
+
+.time {
+  flex: 10%;
+}
+
+.controlsWrapper {
+  flex: 10%;
+
+  display: flex;
+  justify-content: center;
+  gap: padding;
+
+  & button {
+    padding: calc(padding * 1.5);
+
+    border-radius: 50%;
+
+    background-color: white;
+    background: no-repeat center/60% white;
+    border: 1px solid colorSecondary;
+    cursor: pointer;
+  }
+
+  & .btnEdit {
+    background-image: url('@images/edit.png');
+  }
+
+  & .btnDelete {
+    background-image: url('@images/delete.png');
+  }
+}
