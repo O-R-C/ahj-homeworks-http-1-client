@@ -16,12 +16,12 @@ export default class HelpDeskUI extends BaseUI {
       classes: [styles.helpDesk],
     })
 
-    const formContainer = getElement({
-      tag: 'div',
+    this.formContainer = getElement({
+      tag: 'dialog',
       classes: [styles.formContainer],
     })
 
-    const btnAddTicket = getElement({
+    this.btnAddTicket = getElement({
       tag: 'button',
       classes: [styles.btnAddTicket],
       textContent: 'Add Ticket',
@@ -32,7 +32,7 @@ export default class HelpDeskUI extends BaseUI {
       classes: [styles.ticketsContainer],
     })
 
-    app.append(formContainer, btnAddTicket, this.ticketsContainer)
+    app.append(this.formContainer, this.btnAddTicket, this.ticketsContainer)
 
     return app
   }
@@ -47,6 +47,6 @@ export default class HelpDeskUI extends BaseUI {
   }
 
   #addTicketForm() {
-    new TicketForm(this.element)
+    new TicketForm(this.formContainer)
   }
 }

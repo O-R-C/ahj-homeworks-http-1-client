@@ -22,7 +22,9 @@ export default class HelpDesk {
     this.#app = this.#ui.app
   }
 
-  #addEventListeners() {}
+  #addEventListeners() {
+    this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
+  }
 
   #loadAllTickets = async () => {
     const tickets = await this.#fetchData(this.#url)
@@ -46,5 +48,13 @@ export default class HelpDesk {
 
   #fireLoadedTicketsEvent(tickets) {
     document.dispatchEvent(this.#getLoadedTickets(tickets))
+  }
+
+  #onClickAddTicket = () => {
+    this.#showForm()
+  }
+
+  #showForm() {
+    this.#ui.formContainer.showModal()
   }
 }

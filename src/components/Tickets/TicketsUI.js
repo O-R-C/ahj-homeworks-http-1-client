@@ -16,7 +16,6 @@ export default class TicketsUI extends BaseUI {
   renderTickets(tickets) {
     tickets.forEach((ticket) => {
       const ticketEl = this.#getTicketElement(ticket)
-      console.log('🚀 ~ ticketEl:', ticketEl)
       this.app.append(ticketEl)
     })
   }

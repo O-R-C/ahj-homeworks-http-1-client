@@ -9,11 +9,6 @@
   flex-direction: column;
   gap: padding;
 
-  border-radius: radius;
-  border: border;
-
-  box-shadow: shadow;
-
   & label {
     padding: 0 padding;
 
