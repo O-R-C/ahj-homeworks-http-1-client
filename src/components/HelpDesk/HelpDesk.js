@@ -31,16 +31,23 @@ export default class HelpDesk {
   #loadAllTickets = async () => {
     const tickets = await this.#fetchData(this.#url)
 
+    if (!tickets) return
+
     this.#fireLoadedTicketsEvent(tickets)
   }
 
   #fetchData = async (url, options = {}) => {
     try {
       const response = await fetch(url, options)
+
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
       const data = await response.json()
       return data
     } catch (error) {
-      return error
+      console.log(error)
     }
   }
 
