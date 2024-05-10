@@ -1,13 +1,23 @@
 import getElement from '@/js/getElement'
 import styles from './Ticket.module.css'
 
-export const Ticket = ({ name, createdAt }) => {
-  const checkboxSection = getCheckbox('checkbox')
+export const Ticket = ({ name, createdAt, status, id }) => {
+  const ticket = getElement({
+    tag: 'div',
+    classes: [styles.ticket],
+    data: {
+      id,
+    },
+  })
+
+  const checkboxSection = getCheckbox('checkbox', status)
   const descriptionsSection = getDescriptions('descriptions', name)
   const timeSection = getDiv('time', createdAt)
   const controlsSection = getControls()
 
-  return getWrapper('ticket', [checkboxSection, descriptionsSection, timeSection, controlsSection])
+  ticket.append(checkboxSection, descriptionsSection, timeSection, controlsSection)
+
+  return ticket
 }
 
 const getDiv = (className, textContent = '') => {
@@ -21,7 +31,7 @@ const getDiv = (className, textContent = '') => {
   return div
 }
 
-const getCheckbox = (className) => {
+const getCheckbox = (className, status) => {
   const label = getElement({
     tag: 'label',
   })
@@ -29,6 +39,7 @@ const getCheckbox = (className) => {
   const checkbox = getElement({
     tag: 'input',
     type: 'checkbox',
+    checked: status,
     classes: styles[className],
   })
 

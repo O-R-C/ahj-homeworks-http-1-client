@@ -68,11 +68,11 @@
     cursor: pointer;
   }
 
-  & .btnEdit {
+  & .btn-edit {
     background-image: url('@images/edit.png');
   }
 
-  & .btnDelete {
+  & .btn-delete {
     background-image: url('@images/delete.png');
   }
 }
