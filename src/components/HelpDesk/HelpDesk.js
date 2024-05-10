@@ -81,6 +81,7 @@ export default class HelpDesk {
     })
 
     this.#ui.formContainer.close()
+    this.#loadAllTickets()
   }
 
   #onResetForm = () => {

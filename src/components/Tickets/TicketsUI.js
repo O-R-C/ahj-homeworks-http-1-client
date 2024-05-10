@@ -14,6 +14,8 @@ export default class TicketsUI extends BaseUI {
   }
 
   renderTickets(tickets) {
+    this.#clearTickets()
+
     tickets.forEach((ticket) => {
       const ticketEl = this.#getTicketElement(ticket)
       this.app.append(ticketEl)
@@ -22,5 +24,9 @@ export default class TicketsUI extends BaseUI {
 
   #getTicketElement(ticket) {
     return Ticket(ticket)
+  }
+
+  #clearTickets() {
+    this.app.innerHTML = ''
   }
 }
