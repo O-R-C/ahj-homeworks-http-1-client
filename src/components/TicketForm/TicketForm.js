@@ -32,10 +32,9 @@ export default class TicketForm {
   }
 
   #submit() {
-    const name = this.#ui.app.name.value
-    const description = this.#ui.app.description.value
+    const [name, description] = this.#inputs
 
-    this.#fireSubmitEvent({ name, description })
+    this.#fireSubmitEvent({ name: name.value, description: description.value })
 
     this.#ui.app.reset()
   }
