@@ -84,7 +84,10 @@ export default class HelpDesk {
     })
 
     this.#ui.formContainer.close()
-    this.#loadAllTickets()
+
+    setTimeout(() => {
+      this.#loadAllTickets()
+    }, 1000)
   }
 
   #onResetForm = () => {
@@ -104,17 +107,23 @@ export default class HelpDesk {
   }
 
   #onCheckboxChange = (event) => {
-    this.#fetchData(this.#url, {
+    const { id, ...props } = event.detail
+
+    this.#fetchData(`${this.#url}/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(event.detail),
+      body: JSON.stringify(props),
     })
   }
 
   #onDeleteTicket = (event) => {
-    console.log('🚀 ~ event:', event)
-    this.#fetchData(this.#url, {
+    const { id } = event.detail
+
+    this.#fetchData(`${this.#url}/${id}`, {
       method: 'DELETE',
-      body: JSON.stringify(event.detail),
     })
+
+    setTimeout(() => {
+      this.#loadAllTickets()
+    }, 1000)
   }
 }

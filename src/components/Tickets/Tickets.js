@@ -124,7 +124,7 @@ export default class Tickets {
 
   #getDeleteTicket(id) {
     return new CustomEvent('deleteTicket', {
-      detail: id,
+      detail: { id },
     })
   }
 

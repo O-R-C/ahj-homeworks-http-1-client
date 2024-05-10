@@ -43,6 +43,11 @@ export default class TicketsUI extends BaseUI {
   renderTickets(tickets) {
     this.#clearTickets()
 
+    if (!tickets.length) {
+      this.#showNoTicket()
+      return
+    }
+
     tickets.forEach((ticket) => {
       const ticketEl = this.#getTicketElement(ticket)
       this.ticketsList.append(ticketEl)
@@ -59,6 +64,10 @@ export default class TicketsUI extends BaseUI {
 
   #addConfirmDeleteForm() {
     new ConfirmDeleteForm(this.confirmContainer)
+  }
+
+  #showNoTicket() {
+    this.ticketsList.textContent = 'Нет тикетов'
   }
 
   showConfirmDeleteForm() {
