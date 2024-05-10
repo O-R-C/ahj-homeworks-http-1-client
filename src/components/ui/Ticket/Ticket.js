@@ -66,6 +66,7 @@ const getCheckbox = (className, status) => {
     checked: status,
     classes: styles[className],
   })
+  checkbox.savedStatus = status
 
   const customCheckbox = getDiv('checkboxCustom')
 

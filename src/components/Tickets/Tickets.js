@@ -33,7 +33,6 @@ export default class Tickets {
     if (!ticket) return
 
     const id = this.#getId(ticket)
-    console.log('🚀 ~ id:', id)
 
     if (this.#isBtnDelete(target)) {
       this.#onClickBtnDelete(id)
@@ -74,7 +73,9 @@ export default class Tickets {
     return target.closest('input[type="checkbox"]')
   }
 
-  #onClickBtnDelete(id) {}
+  #onClickBtnDelete(id) {
+    this.#fireShowConfirmDelete()
+  }
 
   #onClickBtnEdit(id) {}
 
@@ -83,9 +84,12 @@ export default class Tickets {
       clearTimeout(this.#timerCheckboxChange)
     }
 
+    if (checkbox.checked === checkbox.savedStatus) return
+
     this.#timerCheckboxChange = setTimeout(() => {
+      checkbox.savedStatus = checkbox.checked
       this.#fireCheckboxChange(checkbox, id)
-    }, 1000)
+    }, 500)
   }
 
   #onClickTicket(id) {}
@@ -97,6 +101,12 @@ export default class Tickets {
   #getCheckboxChange(checkbox, id) {
     return new CustomEvent('checkboxChange', {
       detail: { status: checkbox.checked, id },
+    })
+  }
+
+  #getShowConfirmDelete(id) {
+    return new CustomEvent('showConfirmDelete', {
+      detail: id,
     })
   }
 
@@ -112,5 +122,9 @@ export default class Tickets {
 
   #fireDeleteTicket(id) {
     document.dispatchEvent(this.#getDeleteTicket(id))
+  }
+
+  #fireShowConfirmDelete(id) {
+    document.dispatchEvent(this.#getShowConfirmDelete(id))
   }
 }

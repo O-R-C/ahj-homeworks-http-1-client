@@ -1,0 +1,37 @@
+@value values: '@css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.confirm-delete-form {
+  width: 600px;
+  padding: padding;
+
+  display: flex;
+  flex-direction: column;
+  gap: padding;
+
+  & button {
+    padding: padding;
+    border-radius: radius;
+    background-color: transparent;
+    border: border;
+    cursor: pointer;
+
+    align-self: end;
+
+    font-size: inherit;
+  }
+}
+
+.header {
+  font-size: 18px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.controls {
+  display: flex;
+  justify-content: end;
+  gap: padding;
+
+  font-size: 16px;
+}

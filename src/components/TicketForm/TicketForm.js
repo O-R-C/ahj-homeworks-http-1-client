@@ -21,6 +21,7 @@ export default class TicketForm {
 
   #addEventListeners() {
     document.addEventListener('setTitleForm', this.#onSetTitleForm)
+    document.addEventListener('closeTicketForm', this.#onCloseTicketForm)
     this.#ui.app.addEventListener('submit', this.#onSubmit)
     this.#ui.app.addEventListener('reset', this.#onReset)
   }
@@ -83,5 +84,9 @@ export default class TicketForm {
 
   #fireResetEvent() {
     document.dispatchEvent(this.#getResetEvent())
+  }
+
+  #onCloseTicketForm = () => {
+    this.#ui.app.reset()
   }
 }

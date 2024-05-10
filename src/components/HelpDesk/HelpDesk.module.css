@@ -37,6 +37,10 @@
   align-self: end;
 
   box-shadow: shadow;
+
+  &:focus-visible {
+    outline: 1px solid colorSecondary;
+  }
 }
 
 .tickets-container {

@@ -27,6 +27,7 @@ export default class HelpDesk {
     document.addEventListener('resetForm', this.#onResetForm)
     document.addEventListener('checkboxChange', this.#onCheckboxChange)
     this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
+    this.#ui.formContainer.addEventListener('close', this.#onCloseTicketForm)
   }
 
   #loadAllTickets = async () => {
@@ -86,11 +87,25 @@ export default class HelpDesk {
   }
 
   #onResetForm = () => {
-    this.#ui.formContainer.close()
+    this.#ui.hideForm()
+  }
+
+  #onCloseTicketForm = () => {
+    this.#fireCloseTicketFormEvent()
+  }
+
+  #getCloseTicketFormEvent() {
+    return new CustomEvent('closeTicketForm')
+  }
+
+  #fireCloseTicketFormEvent() {
+    document.dispatchEvent(this.#getCloseTicketFormEvent())
   }
 
   #onCheckboxChange = (event) => {
-    const { status, id } = event.detail
-    console.log('🚀 ~  status, id:', status, id)
+    this.#fetchData(this.#url, {
+      method: 'PATCH',
+      body: JSON.stringify(event.detail),
+    })
   }
 }
