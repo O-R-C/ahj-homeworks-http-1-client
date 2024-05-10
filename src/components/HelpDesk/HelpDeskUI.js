@@ -1,8 +1,14 @@
-import getElement from '@/js/getElement'
-import BaseUI from '@/js/Classes/BaseUI'
+import BaseUI from '@js/Classes/BaseUI'
+import getElement from '@js/getElement'
+import Tickets from '@components/Tickets/Tickets'
 import styles from './HelpDesk.module.css'
 
 export default class HelpDeskUI extends BaseUI {
+  constructor(element) {
+    super(element)
+
+    this.addElements()
+  }
   createApp() {
     const app = getElement({
       tag: 'div',
@@ -20,13 +26,21 @@ export default class HelpDeskUI extends BaseUI {
       textContent: 'Add Ticket',
     })
 
-    const ticketsContainer = getElement({
+    this.ticketsContainer = getElement({
       tag: 'div',
       classes: [styles.ticketsContainer],
     })
 
-    app.append(formContainer, btnAddTicket, ticketsContainer)
+    app.append(formContainer, btnAddTicket, this.ticketsContainer)
 
     return app
+  }
+
+  addElements() {
+    this.#addTickets()
+  }
+
+  #addTickets() {
+    new Tickets(this.ticketsContainer)
   }
 }

@@ -1,6 +1,7 @@
 import HelpDeskUI from './HelpDeskUI'
 
 export default class HelpDesk {
+  #url = 'http://localhost:3000/tickets'
   #ui
   #app
 
@@ -13,6 +14,8 @@ export default class HelpDesk {
   #init() {
     this.#addElements()
     this.#addEventListeners()
+
+    this.#loadAllTickets()
   }
 
   #addElements() {
@@ -20,4 +23,28 @@ export default class HelpDesk {
   }
 
   #addEventListeners() {}
+
+  #loadAllTickets = async () => {
+    const tickets = await this.#fetchData(this.#url)
+
+    this.#fireLoadedTicketsEvent(tickets)
+  }
+
+  #fetchData = async (url, options = {}) => {
+    try {
+      const response = await fetch(url, options)
+      const data = await response.json()
+      return data
+    } catch (error) {
+      return error
+    }
+  }
+
+  #getLoadedTickets(tickets) {
+    return new CustomEvent('loadedTickets', { detail: tickets })
+  }
+
+  #fireLoadedTicketsEvent(tickets) {
+    document.dispatchEvent(this.#getLoadedTickets(tickets))
+  }
 }

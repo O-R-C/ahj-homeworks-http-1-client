@@ -19,7 +19,7 @@ export default class BaseUI {
     this.element = element
     this.app = this.createApp()
 
-    this.#bindToDom()
+    this.#init()
   }
 
   /**
@@ -44,6 +44,13 @@ export default class BaseUI {
    */
   #throwError(error) {
     throw new Error(error)
+  }
+
+  /**
+   * Initializes app.
+   */
+  #init() {
+    this.#bindToDom()
   }
 
   /**
