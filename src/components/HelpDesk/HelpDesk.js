@@ -67,9 +67,11 @@ export default class HelpDesk {
 
   #onSubmitTicket = (event) => {
     event.preventDefault()
-    console.log('🚀 ~ event:', event)
 
-    const { name, description } = event.detail
+    this.#fetchData(this.#url, {
+      method: 'POST',
+      body: event.detail,
+    })
 
     this.#ui.formContainer.close()
   }

@@ -32,9 +32,10 @@ export default class TicketForm {
   }
 
   #submit() {
-    const [name, description] = this.#inputs
+    const formData = new FormData(this.#ui.app)
+    formData.append('method', 'createTicket')
 
-    this.#fireSubmitEvent({ name: name.value, description: description.value })
+    this.#fireSubmitEvent(formData)
 
     this.#ui.app.reset()
   }
@@ -60,12 +61,12 @@ export default class TicketForm {
     return !value
   }
 
-  #getSubmitEvent({ name, description }) {
-    return new CustomEvent('submitTicket', { detail: { name, description } })
+  #getSubmitEvent(formData) {
+    return new CustomEvent('submitTicket', { detail: formData })
   }
 
-  #fireSubmitEvent({ name, description }) {
-    document.dispatchEvent(this.#getSubmitEvent({ name, description }))
+  #fireSubmitEvent(formData) {
+    document.dispatchEvent(this.#getSubmitEvent(formData))
   }
 
   #onSetTitleForm = ({ detail: title }) => {
