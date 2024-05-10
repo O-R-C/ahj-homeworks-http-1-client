@@ -1,0 +1,63 @@
+@value values: '@css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.ticket-form {
+  width: 600px;
+  padding: padding;
+
+  display: flex;
+  flex-direction: column;
+  gap: padding;
+
+  border-radius: radius;
+  border: border;
+
+  box-shadow: shadow;
+
+  & label {
+    padding: 0 padding;
+
+    display: flex;
+    flex-direction: column;
+    gap: calc(padding * 0.5);
+  }
+
+  & input,
+  & textarea {
+    width: 100%;
+    padding: padding;
+
+    border: 2px solid colorSecondary;
+    border-radius: radius;
+  }
+
+  & textarea {
+    resize: none;
+  }
+
+  & button {
+    padding: padding;
+    border-radius: radius;
+    background-color: transparent;
+    border: border;
+    cursor: pointer;
+
+    align-self: end;
+
+    font-size: inherit;
+  }
+}
+
+.header {
+  font-size: 18px;
+  text-align: center;
+  font-weight: normal;
+}
+
+.controls {
+  display: flex;
+  justify-content: end;
+  gap: padding;
+
+  font-size: 16px;
+}

@@ -1,6 +1,7 @@
 import BaseUI from '@js/Classes/BaseUI'
 import getElement from '@js/getElement'
 import Tickets from '@components/Tickets/Tickets'
+import TicketForm from '@components/TicketForm/TicketForm'
 import styles from './HelpDesk.module.css'
 
 export default class HelpDeskUI extends BaseUI {
@@ -38,9 +39,14 @@ export default class HelpDeskUI extends BaseUI {
 
   #addElements() {
     this.#addTickets()
+    this.#addTicketForm()
   }
 
   #addTickets() {
     new Tickets(this.ticketsContainer)
+  }
+
+  #addTicketForm() {
+    new TicketForm(this.element)
   }
 }
