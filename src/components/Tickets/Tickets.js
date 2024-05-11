@@ -73,7 +73,8 @@ export default class Tickets {
   }
 
   #isCheckbox(target) {
-    return target.closest('input[type="checkbox"]')
+    const wrapper = target.closest('div[class^="checkbox-wrapper"]')
+    return wrapper?.querySelector('input[type="checkbox"]')
   }
 
   #onClickBtnDelete(id) {
@@ -113,7 +114,6 @@ export default class Tickets {
   }
 
   #onClickTicket(id, ticket) {
-    console.log('🚀 ~ ticket:', ticket)
     const descriptionEl = ticket.querySelector('div[class*="description-full"]')
     this.#ui.toggleDescription(descriptionEl)
 

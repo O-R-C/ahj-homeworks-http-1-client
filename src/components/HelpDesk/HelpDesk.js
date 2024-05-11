@@ -136,8 +136,6 @@ export default class HelpDesk {
 
   #onFullDescription = async (event) => {
     const { id, ticket } = event.detail
-    console.log('🚀 ~ ticket:', ticket)
-
     const description = await this.#fetchData(`${this.#url}/${id}`)
 
     if (!description) return

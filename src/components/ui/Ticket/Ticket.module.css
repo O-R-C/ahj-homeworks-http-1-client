@@ -22,7 +22,7 @@
   gap: padding;
 }
 
-.checkboxWrapper {
+.checkbox-wrapper {
   width: 26px;
 
   & input {
