@@ -24,9 +24,11 @@ export default class HelpDesk {
 
   #addEventListeners() {
     document.addEventListener('resetForm', this.#onResetForm)
+    document.addEventListener('editTicket', this.#onEditTicket)
     document.addEventListener('submitTicket', this.#onSubmitTicket)
-    document.addEventListener('checkboxChange', this.#onCheckboxChange)
     document.addEventListener('deleteTicket', this.#onDeleteTicket)
+    document.addEventListener('checkboxChange', this.#onCheckboxChange)
+    document.addEventListener('fullDescription', this.#onFullDescription)
     this.#ui.btnAddTicket.addEventListener('click', this.#onClickAddTicket)
     this.#ui.formContainer.addEventListener('close', this.#onCloseTicketForm)
   }
@@ -69,6 +71,11 @@ export default class HelpDesk {
 
   #getSetTitleForm(title) {
     return new CustomEvent('setTitleForm', { detail: title })
+  }
+
+  #onEditTicket = (event) => {
+    this.#fireSetTitleForm('Изменить тикет')
+    this.#ui.showForm(event.detail)
   }
 
   #fireSetTitleForm(title) {
@@ -125,5 +132,16 @@ export default class HelpDesk {
     setTimeout(() => {
       this.#loadAllTickets()
     }, 1000)
+  }
+
+  #onFullDescription = async (event) => {
+    const { id, ticket } = event.detail
+    console.log('🚀 ~ ticket:', ticket)
+
+    const description = await this.#fetchData(`${this.#url}/${id}`)
+
+    if (!description) return
+
+    ticket.querySelector('div[class^="description-full"]').textContent = description
   }
 }

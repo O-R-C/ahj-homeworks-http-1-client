@@ -43,7 +43,7 @@ export default class Tickets {
     }
 
     if (this.#isBtnEdit(target)) {
-      this.#onClickBtnEdit(id)
+      this.#onClickBtnEdit(id, ticket)
       return
     }
 
@@ -53,11 +53,11 @@ export default class Tickets {
       return
     }
 
-    this.#onClickTicket(id)
+    this.#onClickTicket(id, ticket)
   }
 
   #getTicket(target) {
-    return target.closest('div[class*="ticket"]')
+    return target.closest('div[class^="ticket--"]')
   }
 
   #getId(ticket) {
@@ -95,7 +95,9 @@ export default class Tickets {
     this.#onConfirmDelete(event)
   }
 
-  #onClickBtnEdit(id) {}
+  #onClickBtnEdit(id) {
+    this.#fireEditTicket(id)
+  }
 
   #onClickCheckbox(checkbox, id) {
     if (this.#timerCheckboxChange) {
@@ -110,7 +112,13 @@ export default class Tickets {
     }, 500)
   }
 
-  #onClickTicket(id) {}
+  #onClickTicket(id, ticket) {
+    console.log('🚀 ~ ticket:', ticket)
+    const descriptionEl = ticket.querySelector('div[class*="description-full"]')
+    this.#ui.toggleDescription(descriptionEl)
+
+    !descriptionEl.textContent && this.#fireFullDescription(id, ticket)
+  }
 
   #deleteTicket(id) {
     this.#fireDeleteTicket(id)
@@ -128,11 +136,31 @@ export default class Tickets {
     })
   }
 
+  #getEditTicket(id) {
+    return new CustomEvent('editTicket', {
+      detail: { id },
+    })
+  }
+
+  #getFullDescription(id, ticket) {
+    return new CustomEvent('fullDescription', {
+      detail: { id, ticket },
+    })
+  }
+
   #fireCheckboxChange(checkbox, id) {
     document.dispatchEvent(this.#getCheckboxChange(checkbox, id))
   }
 
   #fireDeleteTicket(id) {
     document.dispatchEvent(this.#getDeleteTicket(id))
+  }
+
+  #fireEditTicket(id) {
+    document.dispatchEvent(this.#getEditTicket(id))
+  }
+
+  #fireFullDescription(id, ticket) {
+    document.dispatchEvent(this.#getFullDescription(id, ticket))
   }
 }

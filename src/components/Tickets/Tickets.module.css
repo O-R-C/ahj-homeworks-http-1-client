@@ -19,3 +19,10 @@
     box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.1);
   }
 }
+
+.show-description {
+  height: auto;
+  margin-top: calc(padding * 1);
+
+  transition: height 0.5s ease-in-out;
+}

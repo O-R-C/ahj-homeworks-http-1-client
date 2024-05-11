@@ -21,11 +21,14 @@ export const Ticket = ({ name, createdAt, status, id }) => {
   })
 
   const checkboxSection = getCheckbox('checkbox', status)
-  const descriptionsSection = getDescriptions('descriptions', name)
+  const nameSection = getDiv('name', name)
   const timeSection = getDiv('time', createdAt)
   const controlsSection = getControls()
+  const description = getDiv('description-full')
 
-  ticket.append(checkboxSection, descriptionsSection, timeSection, controlsSection)
+  const ticketShort = getWrapper('ticket-short', [checkboxSection, nameSection, timeSection, controlsSection])
+
+  ticket.append(ticketShort, description)
 
   return ticket
 }
@@ -73,21 +76,6 @@ const getCheckbox = (className, status) => {
   label.append(checkbox, customCheckbox)
 
   return getWrapper('checkboxWrapper', [label])
-}
-
-/**
- * Creates a wrapper element containing two div elements with class names 'description' and 'descriptionFull'.
- *
- * @param {string} className - The class name for the wrapper element.
- * @param {string} text - The text content for the 'description' div element.
- * @return {HTMLElement} The wrapper element containing the two div elements.
- */
-const getDescriptions = (className, text) => {
-  const description = getDiv('description', text)
-
-  const descriptionFull = getDiv('descriptionFull')
-
-  return getWrapper('descriptionsWrapper', [description, descriptionFull])
 }
 
 /**

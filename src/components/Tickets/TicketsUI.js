@@ -73,4 +73,8 @@ export default class TicketsUI extends BaseUI {
   showConfirmDeleteForm() {
     this.confirmContainer.showModal()
   }
+
+  toggleDescription(element) {
+    element.classList.toggle(styles.showDescription)
+  }
 }
