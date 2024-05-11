@@ -57,4 +57,11 @@ export default class HelpDeskUI extends BaseUI {
   hideForm() {
     this.formContainer.close()
   }
+
+  getValues(ticket) {
+    return {
+      name: ticket.querySelector('div[class^="name"]').textContent,
+      description: ticket.querySelector('div[class^="description-full"]').textContent,
+    }
+  }
 }

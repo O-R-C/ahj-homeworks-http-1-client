@@ -75,20 +75,43 @@ export default class HelpDesk {
 
   #onEditTicket = (event) => {
     this.#fireSetTitleForm('Изменить тикет')
-    this.#ui.showForm(event.detail)
+    this.#fireStartEditTicket(event.detail)
+    this.#ui.showForm()
   }
 
   #fireSetTitleForm(title) {
     document.dispatchEvent(this.#getSetTitleForm(title))
   }
 
+  #getStartEditTicket({ id, ticket }) {
+    const { name, description } = this.#ui.getValues(ticket)
+    return new CustomEvent('startEditTicket', { detail: { id, name, description } })
+  }
+
+  #fireStartEditTicket(props) {
+    document.dispatchEvent(this.#getStartEditTicket(props))
+  }
+
   #onSubmitTicket = (event) => {
     event.preventDefault()
 
-    this.#fetchData(this.#url, {
-      method: 'POST',
-      body: event.detail,
-    })
+    const { id, formData } = event.detail
+
+    if (id) {
+      this.#fetchData(`${this.#url}/${id}`, {
+        method: 'PATCH',
+        body: formData,
+      })
+    }
+
+    if (!id) {
+      formData.append('method', 'createTicket')
+
+      this.#fetchData(this.#url, {
+        method: 'POST',
+        body: formData,
+      })
+    }
 
     this.#ui.formContainer.close()
 
@@ -122,9 +145,7 @@ export default class HelpDesk {
     })
   }
 
-  #onDeleteTicket = (event) => {
-    const { id } = event.detail
-
+  #onDeleteTicket = ({ detail: { id } }) => {
     this.#fetchData(`${this.#url}/${id}`, {
       method: 'DELETE',
     })
@@ -134,8 +155,7 @@ export default class HelpDesk {
     }, 1000)
   }
 
-  #onFullDescription = async (event) => {
-    const { id, ticket } = event.detail
+  #onFullDescription = async ({ detail: { id, ticket } }) => {
     const description = await this.#fetchData(`${this.#url}/${id}`)
 
     if (!description) return

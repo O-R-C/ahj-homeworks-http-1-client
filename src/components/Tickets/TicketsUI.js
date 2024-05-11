@@ -77,4 +77,8 @@ export default class TicketsUI extends BaseUI {
   toggleDescription(element) {
     element.classList.toggle(styles.showDescription)
   }
+
+  getDescriptionElement(ticket) {
+    return ticket.querySelector('div[class^="description-full"]')
+  }
 }

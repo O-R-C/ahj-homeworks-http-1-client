@@ -3,6 +3,7 @@ import TicketFormUI from './TicketFormUI'
 export default class TicketForm {
   #ui
   #inputs
+  #currentTicketId
 
   constructor(element) {
     this.#ui = new TicketFormUI(element)
@@ -22,6 +23,7 @@ export default class TicketForm {
   #addEventListeners() {
     document.addEventListener('setTitleForm', this.#onSetTitleForm)
     document.addEventListener('closeTicketForm', this.#onCloseTicketForm)
+    document.addEventListener('startEditTicket', this.#onStartEditTicket)
     this.#ui.app.addEventListener('submit', this.#onSubmit)
     this.#ui.app.addEventListener('reset', this.#onReset)
   }
@@ -34,9 +36,9 @@ export default class TicketForm {
 
   #submit() {
     const formData = new FormData(this.#ui.app)
-    formData.append('method', 'createTicket')
+    // formData.append('method', 'createTicket')
 
-    this.#fireSubmitEvent(formData)
+    this.#fireSubmitEvent(formData, this.#currentTicketId)
 
     this.#ui.app.reset()
   }
@@ -62,12 +64,12 @@ export default class TicketForm {
     return !value
   }
 
-  #getSubmitEvent(formData) {
-    return new CustomEvent('submitTicket', { detail: formData })
+  #getSubmitEvent(formData, id) {
+    return new CustomEvent('submitTicket', { detail: { formData, id } })
   }
 
-  #fireSubmitEvent(formData) {
-    document.dispatchEvent(this.#getSubmitEvent(formData))
+  #fireSubmitEvent(formData, id) {
+    document.dispatchEvent(this.#getSubmitEvent(formData, id))
   }
 
   #onSetTitleForm = ({ detail: title }) => {
@@ -88,5 +90,11 @@ export default class TicketForm {
 
   #onCloseTicketForm = () => {
     this.#ui.app.reset()
+  }
+
+  #onStartEditTicket = ({ detail: { id, name, description } }) => {
+    this.#currentTicketId = id
+    this.#ui.app.name.value = name
+    this.#ui.app.description.value = description
   }
 }

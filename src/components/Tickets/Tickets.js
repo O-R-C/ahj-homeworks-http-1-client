@@ -96,8 +96,11 @@ export default class Tickets {
     this.#onConfirmDelete(event)
   }
 
-  #onClickBtnEdit(id) {
-    this.#fireEditTicket(id)
+  #onClickBtnEdit(id, ticket) {
+    const descriptionEl = this.#ui.getDescriptionElement(ticket)
+    !descriptionEl.textContent && this.#fireFullDescription(id, ticket)
+
+    setTimeout(() => this.#fireEditTicket(id, ticket), 100)
   }
 
   #onClickCheckbox(checkbox, id) {
@@ -114,7 +117,7 @@ export default class Tickets {
   }
 
   #onClickTicket(id, ticket) {
-    const descriptionEl = ticket.querySelector('div[class*="description-full"]')
+    const descriptionEl = this.#ui.getDescriptionElement(ticket)
     this.#ui.toggleDescription(descriptionEl)
 
     !descriptionEl.textContent && this.#fireFullDescription(id, ticket)
@@ -136,9 +139,9 @@ export default class Tickets {
     })
   }
 
-  #getEditTicket(id) {
+  #getEditTicket(id, ticket) {
     return new CustomEvent('editTicket', {
-      detail: { id },
+      detail: { id, ticket },
     })
   }
 
@@ -156,8 +159,8 @@ export default class Tickets {
     document.dispatchEvent(this.#getDeleteTicket(id))
   }
 
-  #fireEditTicket(id) {
-    document.dispatchEvent(this.#getEditTicket(id))
+  #fireEditTicket(id, ticket) {
+    document.dispatchEvent(this.#getEditTicket(id, ticket))
   }
 
   #fireFullDescription(id, ticket) {
