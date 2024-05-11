@@ -64,7 +64,7 @@ export default class TicketsUI extends BaseUI {
   renderTickets(tickets) {
     this.#clearTickets()
 
-    if (!tickets.length) {
+    if (!tickets?.length) {
       this.#showNoTicket()
       return
     }

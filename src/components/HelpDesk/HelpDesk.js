@@ -43,7 +43,7 @@ export default class HelpDesk {
   #loadAllTickets = async () => {
     const tickets = await this.#fetchData(this.#url)
 
-    if (!tickets) return
+    // if (!tickets) return
 
     this.#fireLoadedTicketsEvent(tickets)
   }
