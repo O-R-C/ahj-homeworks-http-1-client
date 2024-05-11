@@ -2,9 +2,17 @@ import BaseUI from '@/js/Classes/BaseUI'
 import getElement from '@/js/getElement'
 import styles from './TicketForm.module.css'
 
+/**
+ * The UI for the ticket form.
+ */
 export default class TicketFormUI extends BaseUI {
   #timerEmptyField
 
+  /**
+   * Creates the form element for the ticket form.
+   *
+   * @return {HTMLFormElement} The form element for the ticket form.
+   */
   createApp() {
     const app = getElement({
       tag: 'form',
@@ -76,10 +84,22 @@ export default class TicketFormUI extends BaseUI {
     return app
   }
 
+  /**
+   * Sets the title of the form.
+   *
+   * @param {string} title - The title to set for the form.
+   * @return {void} This function does not return anything.
+   */
   setTitleForm(title) {
     this.header.textContent = title
   }
 
+  /**
+   * Handles showing an error message for an empty field.
+   *
+   * @param {HTMLElement} emptyField - The empty field element to display the error for.
+   * @return {void} This function does not return any value.
+   */
   showEmptyFieldError(emptyField) {
     if (this.#timerEmptyField) {
       clearTimeout(this.timerEmptyField)
