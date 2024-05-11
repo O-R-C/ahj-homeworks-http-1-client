@@ -74,7 +74,6 @@ const getCheckbox = (className, status) => {
   const customCheckbox = getDiv('checkboxCustom')
 
   label.append(checkbox, customCheckbox)
-
   return getWrapper('checkboxWrapper', [label])
 }
 

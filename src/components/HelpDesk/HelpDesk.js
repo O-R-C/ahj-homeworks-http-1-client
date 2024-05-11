@@ -3,7 +3,6 @@ import HelpDeskUI from './HelpDeskUI'
 export default class HelpDesk {
   #url = 'http://localhost:3000/tickets'
   #ui
-  #app
 
   constructor(element) {
     this.#ui = new HelpDeskUI(element)
@@ -12,14 +11,9 @@ export default class HelpDesk {
   }
 
   #init() {
-    this.#addElements()
     this.#addEventListeners()
 
     this.#loadAllTickets()
-  }
-
-  #addElements() {
-    this.#app = this.#ui.app
   }
 
   #addEventListeners() {
@@ -137,11 +131,14 @@ export default class HelpDesk {
   }
 
   #onCheckboxChange = (event) => {
-    const { id, ...props } = event.detail
+    const { id, status } = event.detail
+    console.log('🚀 ~ status:', status)
+    const formData = new FormData()
+    formData.set('status', JSON.stringify(status))
 
     this.#fetchData(`${this.#url}/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(props),
+      body: formData,
     })
   }
 
